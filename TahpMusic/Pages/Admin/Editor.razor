@@ -1,0 +1,72 @@
+﻿@page "/admin/musics/edit/{id:long}"
+@page "/admin/musics/create"
+@inherits OwningComponentBase<ITahpMusicRepository>
+<style>
+    div.validation-message {
+        color: rgb(220, 53, 69);
+        font-weight: 500
+    }
+</style>
+<h3 class="bg-@ThemeColor text-white text-center p-1">Tạo mới đơn hàng</h3>
+<EditForm Model="Music" OnValidSubmit="SaveMusic">
+    <DataAnnotationsValidator />
+    @if (Music.MusicID != 0)
+    {
+        <div class="form-group">
+            <label>ID</label>
+            <input class="form-control" disabled value="@Music.MusicID" />
+        </div>
+    }
+    <div class="form-group">
+        <label>Tên ca khúc</label>
+        <ValidationMessage For="@(() => Music.TenCaKhuc)" />
+        <InputText class="form-control" @bind-Value="Music.TenCaKhuc" />
+    </div>
+    <div class="form-group">
+        <label>Ca Sĩ</label>
+        <ValidationMessage For="@(() => Music.CaSi)" />
+        <InputText class="form-control" @bind-Value="Music.CaSi" />
+    </div>
+    <div class="form-group">
+        <label>Thể Loại</label>
+        <ValidationMessage For="@(() => Music.TheLoai)" />
+        <InputText class="form-control" @bind-Value="Music.TheLoai" />
+    </div>
+    <div class="form-group">
+        <label>Giá</label>
+        <ValidationMessage For="@(() => Music.Gia)" />
+        <InputNumber class="form-control" @bind-Value="Music.Gia" />
+    </div>
+    <button type="submit" class="btn btn-@ThemeColor">Lưu</button>
+    <NavLink class="btn btn-secondary"
+             href="/admin/products">Hủy bỏ</NavLink>
+</EditForm>
+@code {
+    public ITahpMusicRepository Repository => Service;
+    [Inject]
+    public NavigationManager NavManager { get; set; }
+    [Parameter]
+    public long Id { get; set; } = 0;
+    public Music Music { get; set; } = new Music();
+    protected override void OnParametersSet()
+    {
+        if (Id != 0)
+        {
+            Music = Repository.Musics.FirstOrDefault(b => b.MusicID == Id);
+        }
+    }
+    public void SaveMusic()
+    {
+        if (Id == 0)
+        {
+            Repository.CreateMusic(Music);
+        }
+        else
+        {
+            Repository.SaveMusic(Music);
+        }
+        NavManager.NavigateTo("/admin/musics");
+    }
+    public string ThemeColor => Id == 0 ? "primary" : "warning";
+    public string TitleText => Id == 0 ? "Create" : "Edit";
+}

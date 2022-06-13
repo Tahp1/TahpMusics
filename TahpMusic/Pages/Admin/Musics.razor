@@ -1,0 +1,69 @@
+﻿@page "/admin/musics"
+@page "/admin"
+@inherits OwningComponentBase<ITahpMusicRepository>
+<table class="table table-sm table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Tên ca khúc</th>
+            <th>Thể loại</th>
+            <th>Giá</th>
+            <td />
+        </tr>
+    </thead>
+    <tbody>
+        @if (MusicData?.Count() > 0)
+        {
+            @foreach (Music b in MusicData)
+            {
+                <tr>
+                    <td>@b.MusicID</td>
+                    <td>@b.TenCaKhuc</td>
+                    <td>@b.TheLoai</td>
+                    <td>@b.Gia.ToString("c")</td>
+                    <td>
+                        <NavLink class="btn btn-info btn-sm"
+                                 href="@GetDetailsUrl(b.MusicID)">
+                            Chi tiết
+                        </NavLink>
+                        <NavLink class="btn btn-warning btn-sm"
+                                 href="@GetEditUrl(b.MusicID)">
+                            Chỉnh sửa
+                        </NavLink>
+                        <button class="btn btn-danger btn-sm"
+                                @onclick="@(e => DeleteMusic(b))">
+                            Xóa
+                        </button>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="5" class="text-center">Không có nhạc</td>
+            </tr>
+        }
+    </tbody>
+</table>
+<NavLink class="btn btn-primary" href="/admin/musics/create">Tạo mới</NavLink>
+@code {
+    public ITahpMusicRepository Repository => Service;
+    public IEnumerable<Music> MusicData { get; set; }
+    protected async override Task OnInitializedAsync()
+    {
+        await UpdateData();
+    }
+    public async Task UpdateData()
+    {
+        MusicData = await Repository.Musics.ToListAsync();
+    }
+    public async Task DeleteMusic(Music b)
+    {
+        Repository.DeleteMusic(b);
+        await UpdateData();
+    }
+    public string GetDetailsUrl(long id) => $"/admin/musics/details/{id}";
+    public string GetEditUrl(long id) => $"/admin/musics/edit/{id}";
+}
+

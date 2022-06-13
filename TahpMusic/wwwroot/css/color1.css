@@ -1,0 +1,108 @@
+﻿*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root{
+    --black: #333;
+    --white: #f1f1f1;
+    --shadow: rgba(0, 0, 0, 0.2);
+}
+
+.dark{
+    --black: #f1f1f1;
+    --white: #333;
+    --shadow: rgba(255, 255, 255, 0.2);
+}
+
+section {
+    position: relative;
+    width: auto;
+    min-height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--white);
+    flex-direction: column;
+    padding: 60px 40px;
+    transition: 0.5s;
+}
+
+section h2{
+    font-size: 2em;
+    color: var(--black);
+    font-weight: 700;
+    text-align: center;
+}
+
+section p{
+    max-width: 1000px;
+    font-size: 1em;
+    font-weight: 300;
+    text-align: justify;
+    margin-top: 20px;
+    color: var(--black);
+}
+
+section .toggle{
+    position: absolute;
+    right: 40px;
+    top: 20px;
+    font-size: 1em;
+    font-weight: 500;
+    color: var(--black);
+    cursor: pointer;
+    user-select: none;
+}
+
+section .toggle::before {
+    content:'\f186';
+    font-family: fontAwesome;
+    padding: 8px;
+    background: var(--black);
+    margin-right: 10px;
+    font-size: 1.2em;
+    border: 1px solid var(--white);
+    box-shadow: 0 5px 10px var(--shadow);
+}
+
+section .toggle.active::before {
+    content: '\f185';
+}
+
+#table1{
+    color: #00AA00;
+}
+
+#table td:hover{
+    background: aqua;
+}
+
+tfoot {
+    color: #00AA00;
+}
+
+.num1 {
+    color: red;
+}
+
+.num {
+    color: aqua;
+    font-size: 1.5em;
+}
+
+.num2{
+    color: yellow;
+}
+
+#logo {
+    color: orange;
+    font-size: 30px;
+}
+
+body {
+    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(https://thumbs.gfycat.com/GenuineOrangeBeetle-size_restricted.gif);
+}
+
+

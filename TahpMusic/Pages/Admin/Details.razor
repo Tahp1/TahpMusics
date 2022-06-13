@@ -1,0 +1,25 @@
+﻿@page "/admin/musics/details/{id:long}"
+<h3 class="bg-info text-white text-center p-1">Chi tiết</h3>
+<table class="table table-sm table-bordered table-striped">
+    <tbody>
+        <tr><th>ID</th><td>@Music.MusicID</td></tr>
+        <tr><th>Title</th><td>@Music.TenCaKhuc</td></tr>
+        <tr><th>Description</th><td>@Music.CaSi</td></tr>
+        <tr><th>Genre</th><td>@Music.TheLoai</td></tr>
+        <tr><th>Price</th><td>@Music.Gia.ToString("C")</td></tr>
+    </tbody>
+</table>
+<NavLink class="btn btn-warning" href="@EditUrl">Chỉnh sửa</NavLink>
+<NavLink class="btn btn-secondary" href="/admin/musics">Trở về</NavLink>
+@code {
+    [Inject]
+    public ITahpMusicRepository Repository { get; set; }
+    [Parameter]
+    public long Id { get; set; }
+    public Music Music { get; set; }
+    protected override void OnParametersSet()
+    {
+        Music = Repository.Musics.FirstOrDefault(b => b.MusicID == Id);
+    }
+    public string EditUrl => $"/admin/musics/edit/{Music.MusicID}";
+}

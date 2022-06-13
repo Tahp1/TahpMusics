@@ -1,0 +1,25 @@
+﻿@inherits LayoutComponentBase
+<div class="bg-info text-white p-2">
+    <span class="navbar-brand ml-2">TAHPMUSIC</span>
+</div>
+<div class="container-fluid">
+    <div class="row p-2">
+        <div class="col-3">
+            <NavLink class="btn btn-outline-primary btn-block"
+                     href="/admin/musics"
+                     ActiveClass="btn-primary text-white"
+                     Match="NavLinkMatch.Prefix">
+                Musics
+            </NavLink>
+            <NavLink class="btn btn-outline-primary btn-block"
+                     href="/admin/orders"
+                     ActiveClass="btn-primary text-white"
+                     Match="NavLinkMatch.Prefix">
+                Đơn hàng
+            </NavLink>
+        </div>
+        <div class="col">
+            @Body
+        </div>
+    </div>
+</div>

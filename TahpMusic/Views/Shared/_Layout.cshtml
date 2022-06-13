@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>TahpMusic</title>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/lib/font-awesome/css/all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/color1.css"/>
+    <link rel="stylesheet" href="~/js/light.js"/>
+</head>
+<body>
+
+    <div>
+        <div class="bg-dark text-white p-2">
+            <div class="container-fluid">
+                <div id="icon" class="row">
+                    <div id="logo" class="col navbar-brand">TAHPMUSIC <i class="fa fa-headphones"></i></div>
+                    <div class="col-6 text-right">
+                        <vc:cart-summary />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row m-1 p-1">
+            <div id="genres" class="col-3">
+                <p class="num">
+                    <marquee>
+                        Chào mừng bạn đến với MusicsStore.!
+                    </marquee>
+                </p>
+                <p class="num1">
+                    Bạn đang bị stress ?<br />
+                </p>
+                <p class="num1">
+                    Bạn đang buồn ?<br />
+                </p>
+                <p class="num1">
+                    Bạn đang có chuyện không vui ?<br />
+                </p>
+                <p class="num2">
+                    Bạn yên tâm nơi này sẽ giúp bạn trở nên thoải mái sau những bản nhạc thư giãn của chúng tôi.!
+                </p>
+                <vc:genre-navigation />
+            </div>
+            <div class="col-9">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+

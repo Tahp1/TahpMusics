@@ -1,0 +1,47 @@
+﻿.text {
+    text-align: center;
+}
+
+.text1 {
+    position: absolute;
+    left: 3%;
+}
+
+.text2 {
+    position: absolute;
+    left: 16%;
+}
+
+.text4 {
+    position: absolute;
+    left: 34%;
+}
+
+.text3 {
+    position: absolute;
+    left: 45%;
+}
+
+.text5 {
+    position: absolute;
+    left: 56%;
+}
+
+.text6 {
+    position: absolute;
+    left: 71%;
+}
+
+.text7 {
+    position: absolute;
+    left: 90%;
+}
+
+.text8{
+    padding-top: 10px;
+    text-align: center;
+}
+
+footer{
+    background: gray;
+}

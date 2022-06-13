@@ -1,0 +1,16 @@
+﻿@model IEnumerable<string>
+<a class="btn btn-block btn-outline-primary" asp-action="Index"
+   asp-controller="Home" asp-route-theloai="">
+    Home
+</a>
+@foreach (string theloai in Model)
+{
+    <a class="btn btn-block
+ @(theloai == ViewBag.SelectedTheLoai
+ ? "btn-primary": "btn-outline-primary")"
+       asp-action="Index" asp-controller="Home"
+       asp-route-theloai="@theloai"
+       asp-route-musicPage="1">
+        @theloai
+    </a>
+}

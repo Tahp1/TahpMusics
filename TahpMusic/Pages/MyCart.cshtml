@@ -1,0 +1,80 @@
+﻿@page
+@model MyCartModel
+    <link rel="stylesheet" href="~/css/color1.css" />
+    <link rel="stylesheet" href="~/css/footer.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.2/font/bootstrap-icons.css" />
+    <section class="banner">
+        <div class="toggle">
+            Sáng or Tối
+        </div>
+        <h2>Giỏ hàng của tôi</h2>
+        <script>
+            const toggle = document.querySelector('.toggle');
+            const banner = document.querySelector('.banner');
+
+            toggle.onclick = function () {
+                toggle.classList.toggle('active');
+                banner.classList.toggle('dark');
+            }
+        </script>
+        <table border="1" id="table" class="table table-bordered">
+            <thead class="thead-light">
+                <tr>
+                    <th>Số lượng</th>
+                    <th>Mục</th>
+                    <th class="text-right">Giá</th>
+                    <th class="text-right">Tổng phụ</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var line in Model.myCart.Lines)
+                {
+                    <tr>
+                        <td id="table1" class="text-center">@line.Quantity</td>
+                        <td id="table1" class="text-left">@line.Music.TenCaKhuc</td>
+                        <td id="table1" class="text-right">@line.Music.Gia.ToString("c")</td>
+                        <td id="table1" class="text-right">
+                            @((line.Quantity * line.Music.Gia).ToString("c"))
+                        </td>
+                        <td class="text-center">
+                            <form asp-page-handler="Remove" method="post">
+                                <input type="hidden" name="BookID"
+                                       value="@line.Music.MusicID" />
+                                <input type="hidden" name="returnUrl"
+                                       value="@Model.ReturnUrl" />
+                                <button type="submit" class="btn btn-sm btn-danger">
+                                    Hủy bỏ
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="3" class="text-right">Tổng cộng:</td>
+                    <td class="text-right">
+                        @Model.myCart.ComputeTotalValue().ToString("c")
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+        <div class="text-center">
+            <a class="btn btn-info" href="@Model.ReturnUrl">Tiếp tục mua sắm</a>
+            <a class="btn btn-info" asp-action="Checkout" asp-controller="Order">
+                Thanh toán ngay
+            </a>
+        </div>
+    </section>
+    <footer>
+        <h2>Cảm ơn bạn đã ghé và mua sắm tại đây.!</h2>
+        <h2 class="text">Mọi thắc mắc vui lòng liên hệ:</h2>
+        <h3 class="text1"><i class="bi bi-bootstrap"></i><a href="https://icons.getbootstrap.com/"> Bootstrap</a></h3>
+        <h3 class="text2"><i class="bi bi-facebook"></i><a href="https://www.facebook.com/profile.php?id=100040147838900"> Phát Thơm Tho</a></h3>
+        <h3 class="text3"><i class="bi bi-youtube"></i><a href="https://www.youtube.com/"> Youtube</a></h3>
+        <h3 class="text4"><i class="bi bi-envelope-fill"></i><a href=""> Gmail</a></h3>
+        <h3 class="text5"><i class="bi bi-truck"></i><a href=""> Chuyển hàng</a></h3>
+        <h3 class="text6"><i class="bi bi-cart-check"></i><a href=""> Kiểm tra giỏ hàng</a></h3>
+        <h3 class="text7"><i class="bi bi-chat-dots-fill"></i><a href=""> CSKH</a></h3><br />
+        <h2 class="text8">Một sản phẩm của công ty TNHH Thịnh Phát</h2>
+    </footer>
